@@ -1,6 +1,6 @@
 //* question 1
 
-export const companies = [
+const companies = [
   {
     name: "Company 1",
     employees: [
@@ -46,7 +46,7 @@ const processCompanies = (arr) => {
 
 // Solution 2
 
-export const projects = [
+const projects = [
   {
     name: "Project 1",
     client: "BMC Solutions",
@@ -54,7 +54,7 @@ export const projects = [
       {
         title: "Task 1",
         assigness: "John",
-        status: "In Progress",
+        status: "Not Start",
         dueDate: "2023-05-01",
       },
       {
@@ -152,5 +152,37 @@ function assignTaskToEmployee(arr, project, task, user) {
   console.log("Task", taskData);
 }
 
+updateTaskStatus(projects, "Project 1", "Task 1", "In Progress");
 
+function updateTaskStatus(arr, project, task, status) {
+  let assignedTask;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].name === project) {
+      // console.log(arr[i])
+      let tasks = arr[i].tasks;
 
+      for (let j = 0; i < tasks.length; i++) {
+        // console.log(tasks[j])
+
+        if (tasks[j].title === task) {
+          tasks[j].status = status;
+          // console.log(tasks[j], "task j")
+          // console.log(arr[i] , "item i")
+          assignedTask = tasks[j];
+          break;
+        }
+      }
+    }
+  }
+
+  // console.log(assignedTask, "Task status Update");
+
+  //? other approch
+  const tasks = arr.find((el) => el.name === project).tasks;
+
+  const taskData = tasks.find((el) => el.title === task);
+
+  taskData.assigness = status;
+
+  console.log("Task", taskData);
+}
